@@ -7,7 +7,7 @@ def getVideoData(url):
     ydl = ytdl.YoutubeDL()
     with ydl:
         res = ydl.extract_info(url, download=False)
-    return res["formats"][22]["url"], res["title"]
+    return res["formats"][len(res)-1]["url"], res["title"]
 
 @app.route("/geturl", methods=["GET", "POST"])
 def index():
