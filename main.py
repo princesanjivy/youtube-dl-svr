@@ -13,7 +13,7 @@ def getVideoData(url):
 def index():
     if request.method == "POST":
         data = request.json
-        video_url, title = getVideoData(data[0]["yt_url"])
+        video_url, title = getVideoData(data["yt_url"])
         return jsonify([{"video_url" : video_url, "title" : title}])
     else:
         return "nothing here!"
