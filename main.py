@@ -4,7 +4,8 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 
 def getVideoData(url):
-    ydl = ytdl.YoutubeDL()
+    ydl_opts = {"forceip":"4"}
+    ydl = ytdl.YoutubeDL(ydl_opts)
     with ydl:
         res = ydl.extract_info(url, download=False)
     return res["formats"][len(res["formats"])-1]["url"], res["title"]
