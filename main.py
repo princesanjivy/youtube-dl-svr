@@ -8,14 +8,14 @@ def getVideoData(url):
     ydl = ytdl.YoutubeDL(ydl_opts)
     with ydl:
         res = ydl.extract_info(url, download=False)
-    return res["formats"][len(res["formats"])-1]["url"], res["title"]
+    return res["formats"][len(res["formats"])-1]["url"], res["title"], res["formats"]
 
 @app.route("/geturl", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
         data = request.json
-        video_url, title = getVideoData(data["yt_url"])
-        return jsonify({"video_url" : video_url, "title" : title})
+        video_url, title, vidData = getVideoData(data["yt_url"])
+        return jsonify({"video_url": video_url, "title": title, "data": vidData})
     else:
         return "nothing here!"
 
